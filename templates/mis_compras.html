@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="utf-8"><title>Mis Compras</title></head>
+<body>
+  <h2>Mis compras</h2>
+  {% if compras %}
+    <ul>
+      {% for c in compras %}
+        <li>{{ c.fecha }} - {{ c.titulo }} - ${{ c.monto }} - {{ c.estado }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No tienes compras aún.</p>
+  {% endif %}
+  <p><a href="/">Volver</a></p>
+</body>
+</html>

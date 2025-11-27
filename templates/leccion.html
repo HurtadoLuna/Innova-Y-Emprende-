@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="utf-8"><title>{{ leccion.titulo }}</title></head>
+<body>
+  <h2>{{ leccion.titulo }}</h2>
+  {% if leccion.video_url %}
+    <div>
+      <!-- si es URL de YouTube puedes embeber con iframe; aquí mostramos el link simple -->
+      <p><a href="{{ leccion.video_url }}" target="_blank">Ver video</a></p>
+      <iframe width="640" height="360" src="{{ leccion.video_url }}" frameborder="0" allowfullscreen></iframe>
+    </div>
+  {% endif %}
+  <div>
+    <h3>Contenido</h3>
+    <p>{{ leccion.contenido }}</p>
+  </div>
+  <p><a href="/curso/{{ leccion.curso_id }}">Volver al curso</a></p>
+</body>
+</html>

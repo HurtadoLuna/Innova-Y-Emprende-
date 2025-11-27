@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="utf-8"><title>{{ curso.titulo }}</title></head>
+<body>
+  <h2>{{ curso.titulo }}</h2>
+  <img src="{{ curso.imagen_url }}" style="width:320px; height:200px; object-fit:cover;">
+  <p>{{ curso.descripcion }}</p>
+  <p><strong>Precio:</strong> ${{ curso.precio }}</p>
+
+  <h3>Lecciones</h3>
+  {% if lecciones %}
+    <ul>
+      {% for l in lecciones %}
+        <li><a href="/leccion/{{ l.id }}">{{ l.titulo }}</a></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Aún no hay lecciones.</p>
+  {% endif %}
+
+  <h3>Comprar curso (simulado)</h3>
+  <form id="comprarForm">
+    <label>Método de pago:
+      <select id="metodo_pago_id" name="metodo_pago_id"></select>
+    </label><br>
+    <input type="hidden" id="curso_id" name="curso_id" value="{{ curso.id }}">
+    <input type="hidden" id="monto" name="monto" value="{{ curso.precio }}">
+    <button type="button" onclick="comprar()">Comprar</button>
+  </form>
+
+  <p><a href="/">Volver</a></p>
+
+<script>
+async function cargarMetodos(){
+    const r = await fetch("/metodos_pago");
+    const ms = await r.json();
+    const sel = document.getElementById("metodo_pago_id");
+    ms.forEach(m => {
+        const o = document.createElement("option");
+        o.value = m.id;
+        o.text = m.nombre;
+        sel.appendChild(o);
+    });
+}
+async function comprar(){
+    const curso_id = document.getElementById("curso_id").value;
+    const metodo_pago_id = document.getElementById("metodo_pago_id").value;
+    const monto = document.getElementById("monto").value;
+    const res = await fetch("/comprar", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({curso_id, metodo_pago_id, monto})
+    });
+    const data = await res.json();
+    alert(data.mensaje || data.error || "Respuesta recibida");
+}
+cargarMetodos();
+</script>
+
+</body>
+</html>

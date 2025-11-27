@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="utf-8"><title>Crear Curso</title></head>
+<body>
+  <h2>Crear Curso</h2>
+  <form method="POST" action="/profesor/crear_curso">
+    <label>Título: <input required type="text" name="titulo"></label><br>
+    <label>Descripción: <textarea name="descripcion"></textarea></label><br>
+    <label>Precio: <input type="number" step="0.01" name="precio"></label><br>
+    <label>Imagen URL (opcional): <input type="text" name="imagen_url" value="{{ DEFAULT_IMAGE_PATH if DEFAULT_IMAGE_PATH else '' }}"></label><br>
+    <button type="submit">Crear</button>
+  </form>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="utf-8"><title>Panel Profesor</title></head>
+<body>
+  <h2>Panel del Profesor - {{ nombre }}</h2>
+  <p><a href="{{ url_for('profesor_crear_curso') }}">Crear nuevo curso</a></p>
+
+  <h3>Tus cursos</h3>
+  {% if cursos %}
+    <ul>
+    {% for c in cursos %}
+      <li>
+        <strong>{{ c.titulo }}</strong> - ${{ c.precio }} -
+        <a href="/curso/{{ c.id }}">Ver</a> |
+        <a href="/profesor/curso/{{ c.id }}/añadir_leccion">Añadir lección</a>
+      </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>No tienes cursos todavía.</p>
+  {% endif %}
+
+  <p><a href="/">Volver</a></p>
+</body>
+</html>
