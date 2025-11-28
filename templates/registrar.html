@@ -1,21 +1,58 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrate!</title>
+  <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="Styles">
+</head>
+<body>
+  <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"></script>
+</body>
+</html>
+
+<!DOCTYPE html>
 <html lang="es">
 <head><meta charset="utf-8"><title>Registrar</title></head>
 <body>
-  <h2>Crear cuenta</h2>
-  {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      <ul>
-      {% for m in messages %}
-        <li>{{ m }}</li>
-      {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %}
+  <h2>Registrate</h2>
+  
+<div class="carta-registro">
   <form method="POST" action="/registrar">
+
     <label>Nombre: <input required type="text" name="nombre"></label><br>
-    <label>Correo: <input required type="email" name="correo"></label><br>
-    <label>Contraseña: <input required type="password" name="password"></label><br>
+
+    <div class="mb-3">
+
+        <label for="exampleInputEmail1" class="form-label">Correo </label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text">Nunca compartiremos tu correo electrónico con nadie más.</div>
+        
+    </div>
+
+
+    <div class="mb-3">
+
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1">
+
+    </div>
+
+
+    <div class="mb-3 form-check">
+
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+
+</div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+
+
+
     <label>Rol:
       <select name="rol">
         <option value="alumno">Alumno</option>
@@ -26,3 +63,4 @@
   </form>
 </body>
 </html>
+<form>
