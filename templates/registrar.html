@@ -5,27 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registrate!</title>
   <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="Styles">
+  <link rel="stylesheet" href="Styles/registrar.css">
 </head>
-<body>
-  <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"></script>
-</body>
-</html>
 
-<!DOCTYPE html>
-<html lang="es">
-<head><meta charset="utf-8"><title>Registrar</title></head>
 <body>
-  <h2>Registrate</h2>
   
-<div class="carta-registro">
+ <div class="carta-registro">
+
   <form method="POST" action="/registrar">
 
-    <label>Nombre: <input required type="text" name="nombre"></label><br>
+    <h2>Registrate</h2>
+     
+    <hr>
+
+    <label for="exampleInputNombre1" class="form-label">Contraseña</label>
+        <input type="text" class="form-control" id="exampleInputNombre1">
+
+    <br>
 
     <div class="mb-3">
 
-        <label for="exampleInputEmail1" class="form-label">Correo </label>
+        <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
         <div id="emailHelp" class="form-text">Nunca compartiremos tu correo electrónico con nadie más.</div>
         
@@ -34,33 +34,28 @@
 
     <div class="mb-3">
 
-        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <label for="exampleInputPassword1" class="form-label">Contraseña</label>
         <input type="password" class="form-control" id="exampleInputPassword1">
 
     </div>
 
 
-    <div class="mb-3 form-check">
+   <select class="Rol" >
+   <option selected>Tipo de Rol</option>
+   <option value="alumno">Alumno</option>
+   <option value="profesor">Profesor</option>
+   </select>
 
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    <br>
+    <br>
 
-</div>
-
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-</div>
+    <button type="submit" class="btn btn-primary btn-lg">Registrarse</button>
 
 
-
-    <label>Rol:
-      <select name="rol">
-        <option value="alumno">Alumno</option>
-        <option value="profesor">Profesor</option>
-      </select>
-    </label><br>
-    <button type="submit">Registrar</button>
-  </form>
+ </form>
+ </div>
+ 
+<script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"></script> 
 </body>
 </html>
-<form>
+
