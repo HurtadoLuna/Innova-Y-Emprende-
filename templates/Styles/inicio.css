@@ -8,12 +8,7 @@
 
 
 .titulo-bienvenida {
-    background-color: rgb(148, 183, 185);   /* color del recuadro */
-    padding: 10px 20px;
-    border-radius: 8px;
-    display: block;             /* ocupa toda la línea */
-    width: 100%;                /* asegura el ancho total */
-    font-weight: bold;
+    
     font-family: lato;
 }
 
