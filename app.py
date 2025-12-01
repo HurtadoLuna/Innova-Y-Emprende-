@@ -3,7 +3,7 @@ import psycopg2
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static")
 app.secret_key = "CAMBIA_ESTA_CLAVE_POR_ALGO_SEGURO"
 
 # -------------------------
