@@ -44,12 +44,25 @@ def crear_tablas():
         CREATE TABLE IF NOT EXISTS usuarios (
             id SERIAL PRIMARY KEY,
             nombre TEXT NOT NULL,
+            apellido TEXT,
+            username TEXT UNIQUE,
             correo TEXT UNIQUE NOT NULL,
             password_hash TEXT NOT NULL,
             rol TEXT NOT NULL,
             creado_en TIMESTAMP DEFAULT NOW()
         );
     """)
+    # Agregar columnas si no existen (para DBs existentes)
+    try:
+        cur.execute("ALTER TABLE usuarios ADD COLUMN apellido TEXT;")
+        conn.commit()
+    except:
+        pass
+    try:
+        cur.execute("ALTER TABLE usuarios ADD COLUMN username TEXT UNIQUE;")
+        conn.commit()
+    except:
+        pass
     cur.execute("""
         CREATE TABLE IF NOT EXISTS cursos (
             id SERIAL PRIMARY KEY,
@@ -159,6 +172,7 @@ def login():
     if not check_password_hash(password_hash, password):
         flash("Contraseña incorrecta.")
         return redirect(url_for("login"))
+    
     # Login correcto: guardar en session
     session["user_id"] = user_id
     session["nombre"] = nombre
@@ -176,20 +190,57 @@ def logout():
 def registrar():
     if request.method == "GET":
         return render_template("registrar.html")
-    nombre = request.form.get("nombre")
-    correo = request.form.get("correo")
-    password = request.form.get("password")
+    
+    nombre = request.form.get("nombre", "").strip()
+    apellido = request.form.get("apellido", "").strip()
+    username = request.form.get("username", "").strip()
+    correo = request.form.get("correo", "").strip()
+    password = request.form.get("password", "")
     rol = request.form.get("rol") or "alumno"
+    
+    # Validaciones
+    if not nombre or not apellido or not username or not correo or not password:
+        flash("Todos los campos son obligatorios.")
+        return redirect(url_for("registrar"))
+    
+    # Validar formato de correo
+    if "@" not in correo or "." not in correo:
+        flash("Correo electrónico inválido.")
+        return redirect(url_for("registrar"))
+    
+    # Validar contraseña (mínimo 6 caracteres)
+    if len(password) < 6:
+        flash("La contraseña debe tener al menos 6 caracteres.")
+        return redirect(url_for("registrar"))
+    
     password_hash = generate_password_hash(password)
 
     conn = conectar_bd()
     if not conn:
         flash("Error de conexión.")
         return redirect(url_for("registrar"))
+    
     cur = conn.cursor()
     try:
-        cur.execute("INSERT INTO usuarios(nombre, correo, password_hash, rol) VALUES (%s,%s,%s,%s);",
-                    (nombre, correo, password_hash, rol))
+        # Verificar si el correo ya existe
+        cur.execute("SELECT id FROM usuarios WHERE correo = %s;", (correo,))
+        if cur.fetchone():
+            cur.close()
+            conn.close()
+            flash("El correo ya está registrado.")
+            return redirect(url_for("registrar"))
+        
+        # Verificar si el username ya existe
+        cur.execute("SELECT id FROM usuarios WHERE username = %s;", (username,))
+        if cur.fetchone():
+            cur.close()
+            conn.close()
+            flash("El nombre de usuario ya está en uso.")
+            return redirect(url_for("registrar"))
+        
+        # Insertar nuevo usuario
+        cur.execute("INSERT INTO usuarios(nombre, apellido, username, correo, password_hash, rol) VALUES (%s,%s,%s,%s,%s,%s);",
+                    (nombre, apellido, username, correo, password_hash, rol))
         conn.commit()
     except Exception as e:
         conn.rollback()
@@ -197,6 +248,7 @@ def registrar():
         cur.close()
         conn.close()
         return redirect(url_for("registrar"))
+    
     cur.close()
     conn.close()
     flash("Registrado correctamente. Inicia sesión.")

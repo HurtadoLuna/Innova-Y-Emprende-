@@ -1,6 +1,6 @@
 .carta-registro{
     background-color: rgb(247, 247, 240);
-    max-width: 900px;
+    max-width: 700px;
     margin: 50px auto;
     padding: 20px;
     border-radius: 13px;
@@ -16,8 +16,6 @@
   background-repeat: no-repeat;
   min-height: 100vh;
   padding: 40px;
-  background-repeat: repeat-x;
-  animation: moverFondo 10s linear infinite;
 }
 
 
@@ -46,6 +44,37 @@ h2 {
 .btn:hover {
     background-color: rgb(28, 107, 77);
 }
+
+.mt-3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.regresar-seguir {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.link-lateral {
+    margin: 0;
+    padding: 0;
+    color: black;
+    text-align: right;
+}
+
+.link-lateral a {
+    color: rgb(28, 107, 77);
+   
+    
+}
+
+
+
+
 
 
     

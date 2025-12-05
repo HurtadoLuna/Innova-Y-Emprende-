@@ -1,0 +1,22 @@
+.fondo {
+    background-image: url("../styles/imagenes/books-5372392_1920.jpg");
+    background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  padding: 40px;
+}
+
+.contenedor {
+    background-color: rgb(247, 247, 240);
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 13px;
+    box-shadow: 0px 4px 15px rgb(0, 0, 0)
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+}
